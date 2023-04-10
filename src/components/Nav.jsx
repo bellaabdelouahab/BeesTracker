@@ -1,68 +1,64 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import React,{useState} from 'react'
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+
+//iconify
+import { Icon } from '@iconify/react'
+
+// react-router-dom
+import { Link,useLocation,useNavigate } from 'react-router-dom'
+
+//
+
+const Nav = (props) => {
+  
+  const location = useLocation();
+  
+
+  const [selectedNav,setSelectedNav] = useState("Map")
+ 
+  
+  const navItemClass = "text-white text-[40px] hover:bg-[#00948C] p-[5px] cursor-pointer transition-all duration-300"
+
+  const navIcon = props.isNavDisplayed?"material-symbols:keyboard-double-arrow-left":"material-symbols:keyboard-double-arrow-right"
+
+ 
+  
 
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+    
+    
+    <>
+    <Icon onClick={props.ToggleNav} icon={navIcon} className={navItemClass+" bg-[#2CB97D] fixed top-[80px] left-[20px] z-[100000]"}/>
+    <div>
+      
+              
+    
+      
+      {
+        props.isNavDisplayed && (
+          <div className='fixed top-[0px] left-[0px] h-[100vh] w-[80px] bg-[#2CB97D] z-[10000]'>
+<div className='flex flex-col items-center justify-center gap-[10px] h-full'>
+      <Link to={"/Map"}>
+      <Icon  icon={"material-symbols:home-outline"} className={`${navItemClass} ${selectedNav==="Map"?" bg-[#00948C]":" bg-[#2CB97D]"}`} onClick={()=>setSelectedNav("Map")}/>
+</Link>
+<Link to={"/Notifications"}>
+<Icon icon={"material-symbols:notifications-outline"} className={`${navItemClass} ${selectedNav==="Notifications"?" bg-[#00948C]":" bg-[#2CB97D]"}`} onClick={()=>setSelectedNav("Notifications")}/>
+
+</Link>
+<Link to={"/Profile"}>
+<Icon icon={"gg:profile"} className={`${navItemClass} ${selectedNav==="Profile"?" bg-[#00948C]":" bg-[#2CB97D]"}`} onClick={()=>setSelectedNav("Profile")}/>
+
+</Link>
+      <Icon icon={"material-symbols:logout"} className={`${navItemClass} ${"bg-[#f44336]"}`}/>
+      </div>
+      </div>
+        )
+      }
+       
+  
     </div>
-  );
+    </>
+  )
 }
 
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-
-export default function Nav() {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  return (
-    <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Data One" {...a11yProps(0)} />
-          <Tab label="Data Two" {...a11yProps(1)} />
-          <Tab label="Data Three" {...a11yProps(2)} />
-        </Tabs>
-      </Box>
-      <TabPanel value={value} index={0}>
-       <h1>Data one</h1>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-      <h1>Data two</h1>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-      <h1>Data three</h1>
-      </TabPanel>
-    </Box>
-  );
-}
+export default Nav
