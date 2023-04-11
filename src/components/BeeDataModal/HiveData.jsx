@@ -74,7 +74,7 @@ const HiveData = () => {
   ];
 
   return (
-    <div>
+    <div className="w-full ">
       <h1>
         Id: <span className="text-gray-400 !font-thin text-[22px]">123467</span>{" "}
       </h1>
@@ -89,7 +89,14 @@ const HiveData = () => {
           return <DataCard key={index} stream={stream} />;
         })}
         <div className="w-full mt-[30px]">
+          <div className="flex justify-between mb-[10px]">
           <h1>Historique des streams</h1>
+          <select className=" border border-gray-400 rounded-md">
+            <option>Last day</option>
+            <option>Last 7 days</option>
+            <option>Last 30 days</option>
+          </select>
+          </div>
           <Chart />
         </div>
       </div>

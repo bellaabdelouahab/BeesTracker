@@ -22,13 +22,13 @@ const AlertItem = (props) => {
         <div className="flex items-center gap-[5px]">
           <Icon
             icon={icon}
-            className="text-[30px] text-primary-green"
+            className="text-[40px] text-primary-green cursor-pointer"
             onClick={toggleForm}
           />
           <h1>les alertes de {props.title}</h1>
         </div>
         {isFormDisplayed && (
-          <div className="flex flex-row items-center gap-[10px]">
+          <div className="flex flex-row items-center flex-wrap gap-[10px]">
             <div>
               <label className="mr-[10px] text-[14px]">Min:</label>
               <input

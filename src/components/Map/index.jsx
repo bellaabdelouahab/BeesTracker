@@ -18,8 +18,11 @@ const Map = () => {
    const closeBeeData = ()=>setIsBeeDataDisplayed(false)
    const openBeeData = ()=>setIsBeeDataDisplayed(true)
 
+   
 
   return (
+    <>
+    {isBeeDatalDisplayed && <BeeDataModal onClose={closeBeeData}/>}
     <MapContainer style={{width:"100%",height:"100vh"}} center={ourLocation} zoom={9} scrollWheelZoom={false}>
   <TileLayer
     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -28,8 +31,9 @@ const Map = () => {
   <Marker position={ourLocation} icon={CustomIcon} eventHandlers={{ click: openBeeData }}>
     
   </Marker>
-   {isBeeDatalDisplayed && <BeeDataModal onClose={closeBeeData}/>}
+   
 </MapContainer>
+</>
   )
 }
 

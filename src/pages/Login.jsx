@@ -11,12 +11,13 @@ const Login = () => {
   // linear-gradient(to top, rgba(255,0,0,0), #646464)
   return (
     <>
+    
       <div className="font-arial flex justify-center items-center w-[100vw] h-[100vh] bg-cover bg-[bottom] bg-[url('./assets/images/beeBackground.jpg')]">
-        <div className="z-[100] w-[90vw] sm:w-[400px] h-[300px] bg-white rounded-md flex flex-col justify-center items-start gap-[10px] px-[10px] sm:px-[40px]">
+        <div className="z-[100] w-[90vw] sm:w-[400px] h-[300px] bg-white rounded-md flex flex-col justify-center items-start gap-[10px] px-[10px] sm:px-[40px] ">
           <h1 className="text-[25px] font-bold">Log In</h1>
           <form className="w-full">
             <div>
-              <label>Email</label>
+              <label>Email : </label>
               <br />
 
               <input
@@ -26,7 +27,7 @@ const Login = () => {
               ></input>
             </div>
             <div>
-              <label>Password</label>
+              <label>Password :</label>
 
               <input
                 type="password"
@@ -37,7 +38,7 @@ const Login = () => {
 
             <Link
               to="/map"
-              className="block text-center w-full bg-[#FFEB3B] text-white my-[10px] rounded-xl p-[5px]"
+              className="block text-center w-full bg-[#FFEB3B] text-white my-[10px] rounded-xl p-[7px]"
             >
               Connect
             </Link>

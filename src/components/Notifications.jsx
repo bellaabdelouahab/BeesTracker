@@ -5,10 +5,11 @@ import NotificationItem from "./NotificationItem";
 
 const Notifications = () => {
   return (
-    <div className="ml-[90px] mt-[100px] mb-[20px]">
-      <div className="flex flex-col justify-center items-start h-full">
+    <div className="w-full flex justify-center items-center">
+    <div className="p-[20px] mt-[100px] mb-[20px] border border-gray-500 rounded-md w-[90%]">
+      <div className="flex flex-col justify-center  h-full">
         <h1 className="text-[40px] mb-[10px]">Notifications</h1>
-        <div className="w-[80%] flex flex-col gap-[10px]">
+        <div className="w-[100%] flex flex-col justify-center items-center  gap-[10px]">
           <NotificationItem
             hiveId={"R4"}
             description={"R4 has passed max of weight with 4kg"}
@@ -41,6 +42,7 @@ const Notifications = () => {
           />
         </div>
       </div>
+    </div>
     </div>
   );
 };

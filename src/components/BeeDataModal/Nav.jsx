@@ -60,10 +60,10 @@ export default function Nav() {
           aria-label="basic tabs example"
         >
           <Tab label="Données de la ruche" {...a11yProps(0)} />
-          <Tab label="Alerts" {...a11yProps(2)} />
+          <Tab label="Alértes" {...a11yProps(2)} />
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}>
+      <TabPanel value={value} index={0} >
         <HiveData />
       </TabPanel>
       <TabPanel value={value} index={1}>

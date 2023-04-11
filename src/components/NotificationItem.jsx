@@ -6,7 +6,7 @@ const NotificationItem = (props) => {
   const bgColors = ["", "#f44336", "#FFEB3B", "#2CB97D"];
 
   return (
-    <div className="flex flex-row gap-[10px] border border-gray-400 rounded-md w-full p-[20px]">
+    <div className="flex flex-row gap-[10px] border border-gray-400 rounded-md w-[100%] p-[20px] max-w-[600px]">
       <div
         className={
           `grid justify-center items-center w-[50px] h-[50px]  text-white rounded-sm bg-[` +
