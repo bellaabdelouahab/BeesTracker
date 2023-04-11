@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 // react-router-dom
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 
 //components
 import Map from "./components/Map";
@@ -39,7 +39,8 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/login" element={<Login />}></Route>
+      
+        <Route path="/login"  element={<Login />}></Route>
         <Route path="/" element={<ContainerApp />}>
           <Route path="/Map" element={<Map />} />
           <Route path="/Profile" element={<Profile />}></Route>
