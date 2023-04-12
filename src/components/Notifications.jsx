@@ -1,9 +1,18 @@
-import React from "react";
+import React,{useEffect} from "react";
 
 //components
 import NotificationItem from "./NotificationItem";
 
+
+
+
+
+
+
 const Notifications = () => {
+
+  
+
   return (
     <div className="w-full flex justify-center items-center">
     <div className="p-[20px] mt-[100px] mb-[20px] border border-gray-500 rounded-md w-[90%]">

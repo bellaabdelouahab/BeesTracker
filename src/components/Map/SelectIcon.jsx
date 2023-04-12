@@ -1,11 +1,11 @@
-import bee from "../assets/svgs/bee.svg";
-import be from "../assets/images/bee-removebg-preview.png";
+import selectedBee from "../../assets/images/selectedBee.png"
+
 
 import L from "leaflet";
 
-const CustomIcon = new L.Icon({
-  iconUrl: be,
-  iconRetinaUrl: be,
+let SelectIcon = new L.Icon({
+  iconUrl: selectedBee,
+  iconRetinaUrl: selectedBee,
   iconAnchor: null,
   popupAnchor: null,
   shadowUrl: null,
@@ -15,4 +15,7 @@ const CustomIcon = new L.Icon({
   className: "leaflet-div-icon",
 });
 
-export default CustomIcon;
+
+
+
+export default SelectIcon;

@@ -5,11 +5,16 @@ export default {
     extend: {
       keyframes: {
         translateBox: {
-          '0%': { transform: 'translate(10px,10px)' },
-          '50%': { transform: 'rotate(10px,10px)' },
-          '100%': { transform: 'rotate(10px,10px)' },
+          '0%': { transform: 'translateY(-100px)',
+            opacity: 0 },
+          
+          '100%': { transform: 'translateY(0px)',
+          opacity: 1 },
           
         },
+      },
+      animation: {
+        translateBox: 'translateBox 400ms ease-in-out ',
       },
       colors: {
         "primary-yellow": "#FFEB3B",

@@ -5,7 +5,8 @@ import { MapContainer, TileLayer,Marker ,Popup} from 'react-leaflet';
 
 // Components
 import BeeDataModal from '../BeeDataModal';
-import CustomIcon from "../CustomIcon"
+import CustomIcon from "./CustomIcon"
+import SelectIcon from './SelectIcon';
 
 
 
@@ -14,7 +15,6 @@ const ourLocation = [30.4270, -8.8763]
 
 const Map = () => {
    const [isBeeDatalDisplayed,setIsBeeDataDisplayed] = useState(false) 
-
    const closeBeeData = ()=>setIsBeeDataDisplayed(false)
    const openBeeData = ()=>setIsBeeDataDisplayed(true)
 
@@ -31,8 +31,10 @@ const Map = () => {
   <Marker position={ourLocation} icon={CustomIcon} eventHandlers={{ click: openBeeData }}>
     
   </Marker>
-   
+
 </MapContainer>
+
+
 </>
   )
 }

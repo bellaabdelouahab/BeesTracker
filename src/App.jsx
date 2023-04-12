@@ -40,7 +40,7 @@ function App() {
     <>
       <Routes>
       
-        <Route path="/login"  element={<Login />}></Route>
+        <Route path="/" index element={<Login />}></Route>
         <Route path="/" element={<ContainerApp />}>
           <Route path="/Map" element={<Map />} />
           <Route path="/Profile" element={<Profile />}></Route>

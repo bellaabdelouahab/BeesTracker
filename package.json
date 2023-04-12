@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -21,7 +21,8 @@
     "react-dom": "^18.2.0",
     "react-leaflet": "^4.2.1",
     "react-query": "^3.39.3",
-    "react-router-dom": "^6.10.0"
+    "react-router-dom": "^6.10.0",
+    "socket.io-client": "^2.1.1"
   },
   "devDependencies": {
     "@iconify/react": "^4.1.0",

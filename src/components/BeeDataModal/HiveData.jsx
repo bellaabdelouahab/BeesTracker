@@ -91,7 +91,7 @@ const HiveData = () => {
         <div className="w-full mt-[30px]">
           <div className="flex justify-between mb-[10px]">
           <h1>Historique des streams</h1>
-          <select className=" border border-gray-400 rounded-md">
+          <select className=" border border-gray-400 rounded-md px-[10px] py-[2px]">
             <option>Last day</option>
             <option>Last 7 days</option>
             <option>Last 30 days</option>
