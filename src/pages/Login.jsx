@@ -1,5 +1,5 @@
 import React from "react";
-
+import Message  from "../components/messages/Message";
 // react-router-dom
 import { Link } from "react-router-dom";
 
@@ -11,7 +11,6 @@ const Login = () => {
   // linear-gradient(to top, rgba(255,0,0,0), #646464)
   return (
     <>
-    
       <div className="font-arial flex justify-center items-center w-[100vw] h-[100vh] bg-cover bg-[bottom] bg-[url('./assets/images/beeBackground.jpg')]">
         <div className="z-[100] w-[90vw] sm:w-[400px] h-[300px] bg-white rounded-md flex flex-col justify-center items-start gap-[10px] px-[10px] sm:px-[40px] ">
           <h1 className="text-[25px] font-bold">Log In</h1>
@@ -43,6 +42,7 @@ const Login = () => {
               Connect
             </Link>
           </form>
+          <Message room={"user-2"}/>
         </div>
       </div>
       <div className="fixed top-[0px] left-[0px] w-[100vw] h-[100vh] bg-gradient-to-b from-[rgba(255,0,0,0)] to-[#000000]"></div>
@@ -51,3 +51,6 @@ const Login = () => {
 };
 
 export default Login;
+
+
+
