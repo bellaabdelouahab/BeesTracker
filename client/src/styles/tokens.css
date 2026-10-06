@@ -1,0 +1,36 @@
+:root {
+  --display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+
+  /* beeswax paper, ink, propolis and honey */
+  --paper: #f5eedb;
+  --panel: #fffaf0;
+  --panel-2: #f9f1dc;
+  --ink: #17120a;
+  --ink-2: #54482e;
+  --ink-3: #8a7d61;
+  --line: #d8caa6;
+  --line-strong: #bfae82;
+  --amber: #f0a500;
+  --amber-deep: #b87800;
+  --amber-soft: #f0a50026;
+  --propolis: #6a4713;
+
+  --ok: #3d7a3a;    --ok-soft: #3d7a3a1f;
+  --warn: #c87600;  --warn-soft: #c876001f;
+  --crit: #b3301c;  --crit-soft: #b3301c1d;
+  --off: #766f60;   --off-soft: #766f6024;
+  --info: #28648a;  --info-soft: #28648a1c;
+
+  --m-temperature: #cf4a0c;
+  --m-humidity: #1f6fb2;
+  --m-weight: #b87800;
+  --m-activity: #3d7a3a;
+  --m-sound: #6a43c2;
+  --m-battery: #766f60;
+
+  --cut: 12px;
+  --cut-sm: 7px;
+  --topbar: 58px;
+}

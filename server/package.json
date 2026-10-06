@@ -1,0 +1,17 @@
+{
+  "name": "ibee-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hive monitoring API: farms, hives, sensor streams, alerts, live sockets",
+  "main": "src/index.js",
+  "scripts": { "start": "node src/index.js" },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.3.0",
+    "compression": "^1.7.4",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "socket.io": "^4.7.5"
+  }
+}
