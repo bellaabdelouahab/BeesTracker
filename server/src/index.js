@@ -8,6 +8,7 @@ const auth = require('./auth');
 const routes = require('./routes');
 const demo = require('./demo');
 const simulator = require('./simulator');
+const tiles = require('./tiles');
 const { bus } = require('./ingest');
 
 const app = express();
@@ -16,6 +17,7 @@ app.disable('x-powered-by');
 app.use(compression());
 app.use(express.json({ limit: '100kb' }));
 app.use((req, res, next) => { res.setHeader('X-Content-Type-Options', 'nosniff'); res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin'); next(); });
+app.get('/tiles/:z/:x/:y.png', tiles.handler);
 app.use('/api', routes);
 app.use('/api', (req, res) => res.status(404).json({ message: 'Unknown endpoint' }));
 
@@ -51,6 +53,7 @@ server.listen(port, () => {
   try {
     if (process.env.SEED_DEMO !== 'false') console.log('[demo]', JSON.stringify(demo.bootstrap({ password: process.env.ADMIN_PASSWORD })));
     simulator.startBackground();
+    setInterval(tiles.prune, 6 * 3600e3);
     if (process.env.SIMULATOR !== 'false') simulator.start();
   } catch (e) { console.error('Bootstrap failed', e); }
 });

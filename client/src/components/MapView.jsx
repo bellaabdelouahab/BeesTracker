@@ -69,37 +69,21 @@ function Markers({ markers, selected, onSelect, colors }) {
   ));
 }
 
+// street tiles come through our own server (/tiles), which caches them and talks to OpenStreetMap for us
 const TILES = {
-  osm: ['https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'],
-  esri: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', 'Tiles &copy; Esri'],
+  osm: ['/tiles/{z}/{x}/{y}.png', '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'],
   sat: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', 'Tiles &copy; Esri'],
 };
-
-// A blocked OpenStreetMap tile (HTTP 403) still renders as an "Access blocked" picture, so the page cannot see it as an
-// error. One cross-origin probe tells us the real status, and the map falls back to Esri street tiles if OSM refuses us.
-function useBaseProvider(satellite) {
-  const [osmOk, setOsmOk] = useState(() => sessionStorage.getItem('ibee.osm') !== 'blocked');
-  useEffect(() => {
-    if (sessionStorage.getItem('ibee.osm')) return undefined;
-    let alive = true;
-    fetch('https://tile.openstreetmap.org/9/246/200.png', { mode: 'cors', cache: 'no-store' })
-      .then((r) => r.ok)
-      .catch(() => false)
-      .then((ok) => { sessionStorage.setItem('ibee.osm', ok ? 'ok' : 'blocked'); if (alive) setOsmOk(ok); });
-    return () => { alive = false; };
-  }, []);
-  return satellite ? 'sat' : osmOk ? 'osm' : 'esri';
-}
 
 /** markers: [{ id, lat, lng, color, status, label, title, body, group, groupName }] */
 export default function MapView({ markers, height = '100%', selected, onSelect, focus, flyTo, satellite = false, colors }) {
   const first = useMemo(() => (markers[0] ? [markers[0].lat, markers[0].lng] : [30.47, -8.88]), []); // eslint-disable-line react-hooks/exhaustive-deps
-  const base = useBaseProvider(satellite);
+  const base = satellite ? 'sat' : 'osm';
   const [url, attribution] = TILES[base];
   return (
     <div className="mapbox" style={{ height, width: '100%' }}>
       <MapContainer center={first} zoom={9} scrollWheelZoom={false} style={{ height: '100%', width: '100%' }}>
-        <TileLayer key={base} url={url} attribution={attribution} subdomains="abc" maxZoom={19} referrerPolicy="strict-origin-when-cross-origin" />
+        <TileLayer key={base} url={url} attribution={attribution} maxZoom={19} />
         <Fit markers={markers} focus={focus} />
         <FlyTo target={flyTo} />
         <Controls markers={markers} />
