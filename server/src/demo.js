@@ -76,9 +76,11 @@ const applyHistory = (hiveIdx, t, r) => {
 
 const ensureUsers = (password) => {
   if (!password) return;
+  // once an administrator exists (whatever its email), demo accounts are never recreated
+  if (db.prepare("SELECT 1 FROM users WHERE role = 'admin'").get()) return;
   const add = db.prepare('INSERT OR IGNORE INTO users (name, email, password_hash, role, created_at) VALUES (?, ?, ?, ?, ?)');
   const hash = bcrypt.hashSync(password, 10);
-  add.run('Administrator', 'admin@ibee.abdelouahab.xyz', hash, 'admin', Date.now());
+  add.run('Administrator', (process.env.ADMIN_EMAIL || 'admin@ibee.abdelouahab.xyz').toLowerCase(), hash, 'admin', Date.now());
   add.run('Youssef Amrani', 'youssef@ibee.demo', hash, 'keeper', Date.now());
 };
 

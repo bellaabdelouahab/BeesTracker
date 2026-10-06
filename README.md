@@ -20,14 +20,15 @@ JWT_SECRET=change-me ADMIN_PASSWORD=choose-one docker compose up --build   # htt
 
 Development: `cd server && npm i && npm start`, then `cd client && npm i && npm run dev` (the dev server proxies `/api` and `/socket.io` to port 3000).
 
-On first start the server creates demo data: 4 apiaries, 18 hives, 14 days of readings and the alerts that history would have raised. Sign in as `admin@ibee.abdelouahab.xyz` with `ADMIN_PASSWORD`.
+On first start the server creates demo data: 4 apiaries, 18 hives, 14 days of readings and the alerts that history would have raised. Sign in with `ADMIN_EMAIL` and `ADMIN_PASSWORD`.
 
 ## Configuration
 
 | Variable | Default | Meaning |
 |---|---|---|
 | `JWT_SECRET` | none, required | signs login tokens |
-| `ADMIN_PASSWORD` | none, required | password given to the demo accounts on first start |
+| `ADMIN_EMAIL` | `admin@ibee.abdelouahab.xyz` | email of the administrator created on first start |
+| `ADMIN_PASSWORD` | none, required | password given to the demo accounts on first start. Not applied again once an administrator exists |
 | `SIMULATOR` | `true` | feed every hive with generated readings. Set `false` when real sensors are connected |
 | `SIM_AMBIENT` | `true` | random short events (heat, swarm, low battery...) so alerts appear and clear |
 | `SIM_INTERVAL_SEC` | `30` | one simulator cycle |

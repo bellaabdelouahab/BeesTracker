@@ -4,6 +4,7 @@ services:
     restart: unless-stopped
     environment:
       JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@ibee.abdelouahab.xyz}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:?set ADMIN_PASSWORD}
       SIMULATOR: ${SIMULATOR:-true}
       SIM_AMBIENT: ${SIM_AMBIENT:-true}
