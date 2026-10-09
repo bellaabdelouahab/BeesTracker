@@ -16,6 +16,7 @@ const RULES = {
   swarm_risk: { label: 'Swarming signature', unit: 'Hz' },
   lid_open: { label: 'Lid open', unit: 'min' },
   battery_low: { label: 'Low battery', unit: 'V' },
+  activity_spike: { label: 'Abnormal entrance activity', unit: 'x normal' },
   offline: { label: 'Hive offline', unit: 'min' },
 };
 
@@ -43,6 +44,17 @@ const evaluate = (hive, r, now, opts = {}) => {
   if (opts.skipDb) return out;
   const past = db.prepare('SELECT weight FROM streams WHERE hive_id = ? AND created_at <= ? ORDER BY created_at DESC LIMIT 1').get(hive.id, now - 30 * 60000);
   if (past && past.weight - r.weight >= 1.5) t('weight_drop', 'critical', past.weight - r.weight, 1.5);
+  // Entrance activity against this hive's own normal for the same time of day
+  // (last 7 days, within an hour of now). A sudden multiple of normal points to
+  // robbing or a predator attack. Falls back to the last 24 h with little history.
+  const minuteOfDay = Math.floor(now / 60000) % 1440;
+  let base = db.prepare(`SELECT AVG(activity) AS a, COUNT(*) AS n FROM streams WHERE hive_id = ? AND created_at BETWEEN ? AND ?
+    AND ABS(((created_at / 60000) % 1440) - ?) <= 60`).get(hive.id, now - 7 * 86400000, now - 30 * 60000, minuteOfDay);
+  if (!base || base.n < 20) base = db.prepare('SELECT AVG(activity) AS a, COUNT(*) AS n FROM streams WHERE hive_id = ? AND created_at BETWEEN ? AND ?').get(hive.id, now - 86400000, now - 30 * 60000);
+  if (base && base.n >= 20 && base.a > 5 && r.activity >= 60 && r.activity > 2 * base.a) {
+    const ratio = r.activity / base.a;
+    t('activity_spike', ratio > 3 ? 'critical' : 'warning', ratio, 2);
+  }
   return out;
 };
 
@@ -53,6 +65,7 @@ const describe = (type, v) => {
   if (type === 'weight_drop') return `${RULES[type].label}: ${n} kg lost in 30 min`;
   if (type === 'swarm_risk') return `${RULES[type].label}: hum at ${n} Hz with a hot brood nest`;
   if (type === 'lid_open') return `${RULES[type].label}: open for ${n} min`;
+  if (type === 'activity_spike') return `${RULES[type].label}: ${round(v.value, 1)} times the normal for this hour (possible robbing or predators)`;
   return `${RULES[type].label}: ${n} ${u} (limit ${lim} ${u})`;
 };
 
